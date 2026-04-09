@@ -4,6 +4,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    // Create difficulty enum
     public enum Difficulty
     {
         Easy,
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour
         Hard
     }
 
+    // Create difficulty variable
     public Difficulty currentDifficulty;
 
     void Awake()
