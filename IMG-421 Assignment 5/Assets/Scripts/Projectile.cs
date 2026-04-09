@@ -72,7 +72,8 @@ public class Projectile : MonoBehaviour
     {
         float explosionRadius = 5f;
         float explosionForce = 800f;
-        float upwardsModifier = 0.5f; // adds a slight upward bias to the blast
+        // Add a slight upward bias to the blast
+        float upwardsModifier = 0.5f;
 
         // Find everything in radius
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);

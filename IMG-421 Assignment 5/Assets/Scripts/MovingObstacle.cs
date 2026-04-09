@@ -2,16 +2,19 @@ using UnityEngine;
 
 public class MovingObstacle : MonoBehaviour
 {
+    // How fast it moves
     public float speed = 1f;
+    // Distance it travels
     public float range = 3f;
 
+    // Where it starts
     private Vector3 startPos;
 
     void Start()
     {
         startPos = transform.position;
 
-        // Scale speed with difficulty
+        // Change speed and range with difficulty
         switch (GameManager.Instance.currentDifficulty)
         {
             case GameManager.Difficulty.Medium: 

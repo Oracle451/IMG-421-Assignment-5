@@ -69,6 +69,7 @@ public class Slingshot : MonoBehaviour
         {
             aimingMode = false;
 
+            // Create 3 projectiles if on easy
             float[] angles = GameManager.Instance.currentDifficulty == GameManager.Difficulty.Easy
                 ? new float[] { -15f, 0f, 15f }
                 : new float[] { 0f };
