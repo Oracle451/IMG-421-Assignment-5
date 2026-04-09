@@ -32,6 +32,11 @@ public class Projectile : MonoBehaviour
     void FixedUpdate() {
         if ( rigid.isKinematic || !awake ) return;
 
+        if (GameManager.Instance.currentDifficulty == GameManager.Difficulty.Hard)
+        {
+            rigid.AddForce(Vector3.down * 5f, ForceMode.Acceleration);
+        }
+
         Vector3 deltaV3 = transform.position - prevPos;
         deltas.Add( deltaV3.magnitude );
         prevPos = transform.position;
@@ -53,6 +58,35 @@ public class Projectile : MonoBehaviour
             awake = false;
             rigid.Sleep();
         }
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (GameManager.Instance.currentDifficulty == GameManager.Difficulty.Hard)
+        {
+            Explode();
+        }
+    }
+
+    void Explode()
+    {
+        float explosionRadius = 5f;
+        float explosionForce = 800f;
+        float upwardsModifier = 0.5f; // adds a slight upward bias to the blast
+
+        // Find everything in radius
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+
+        foreach (Collider hit in colliders)
+        {
+            Rigidbody rb = hit.GetComponent<Rigidbody>();
+            if (rb != null && rb != rigid)
+            {
+                rb.AddExplosionForce(explosionForce, transform.position, explosionRadius, upwardsModifier, ForceMode.Impulse);
+            }
+        }
+        
+        Destroy(gameObject);
     }
 
     private void OnDestroy() {

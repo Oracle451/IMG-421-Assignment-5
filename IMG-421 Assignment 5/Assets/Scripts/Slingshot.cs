@@ -82,15 +82,21 @@ public class Slingshot : MonoBehaviour
 
                 Rigidbody projRB = proj.GetComponent<Rigidbody>();
                 projRB.isKinematic = false;
-                
+
                 projRB.collisionDetectionMode = CollisionDetectionMode.Continuous;
 
                 float adjustedMult = velocityMult;
                 switch (GameManager.Instance.currentDifficulty)
                 {
-                    case GameManager.Difficulty.Easy:   adjustedMult = velocityMult * 2f;   break;
-                    case GameManager.Difficulty.Medium: adjustedMult = velocityMult * 1.5f; break;
-                    case GameManager.Difficulty.Hard:   adjustedMult = velocityMult;        break;
+                    case GameManager.Difficulty.Easy: 
+                        adjustedMult = velocityMult * 1.5f; 
+                        break;
+                    case GameManager.Difficulty.Medium: 
+                        adjustedMult = velocityMult * 2f; 
+                        break;
+                    case GameManager.Difficulty.Hard: 
+                        adjustedMult = velocityMult; 
+                        break;
                 }
 
                 Vector3 velocity = -mouseDelta * adjustedMult;
